@@ -1,3 +1,4 @@
+using FlyList.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlyList.Controllers

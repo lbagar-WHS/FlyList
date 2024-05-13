@@ -1,4 +1,4 @@
-namespace FlyList
+namespace FlyList.Models
 {
     public class WeatherForecast
     {
