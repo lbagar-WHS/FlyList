@@ -30,3 +30,36 @@ D:\Studium\Semester 4\SLab\FlyList\FlyList\obj\Debug\net8.0\refint\FlyList.dll
 D:\Studium\Semester 4\SLab\FlyList\FlyList\obj\Debug\net8.0\FlyList.pdb
 D:\Studium\Semester 4\SLab\FlyList\FlyList\obj\Debug\net8.0\FlyList.genruntimeconfig.cache
 D:\Studium\Semester 4\SLab\FlyList\FlyList\obj\Debug\net8.0\ref\FlyList.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\appsettings.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\FlyList.exe
+C:\Users\mribb\source\repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\FlyList.deps.json
+C:\Users\mribb\source\repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\FlyList.runtimeconfig.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\FlyList.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\FlyList.pdb
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.csproj.AssemblyReference.cache
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.AssemblyInfoInputs.cache
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.AssemblyInfo.cs
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.csproj.CoreCompileInputs.cache
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.sourcelink.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets\msbuild.FlyList.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets\msbuild.build.FlyList.props
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.FlyList.props
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.FlyList.props
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\scopedcss\bundle\FlyList.styles.css
+C:\Users\mribb\source\repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.csproj.Up2Date
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\refint\FlyList.dll
+C:\Users\mribb\Source\Repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.pdb
+C:\Users\mribb\source\repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\FlyList.genruntimeconfig.cache
+C:\Users\mribb\source\repos\lbagar-WHS\FlyList\FlyList\obj\Debug\net8.0\ref\FlyList.dll

@@ -428,23 +428,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lbagar\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\mribb\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Studium\\Semester 4\\SLab\\FlyList\\FlyList\\FlyList.csproj",
+      "projectUniqueName": "C:\\Users\\mribb\\Source\\Repos\\lbagar-WHS\\FlyList\\FlyList\\FlyList.csproj",
       "projectName": "FlyList",
-      "projectPath": "D:\\Studium\\Semester 4\\SLab\\FlyList\\FlyList\\FlyList.csproj",
-      "packagesPath": "C:\\Users\\lbagar\\.nuget\\packages\\",
-      "outputPath": "D:\\Studium\\Semester 4\\SLab\\FlyList\\FlyList\\obj\\",
+      "projectPath": "C:\\Users\\mribb\\Source\\Repos\\lbagar-WHS\\FlyList\\FlyList\\FlyList.csproj",
+      "packagesPath": "C:\\Users\\mribb\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mribb\\Source\\Repos\\lbagar-WHS\\FlyList\\FlyList\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\lbagar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mribb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -452,8 +453,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.telerik.com/nuget": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {

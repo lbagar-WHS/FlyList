@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlyList")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d68fea45b6fe74b141007c94912ef362b78525e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac9a6820abeb6083e9f42e2bdc1ffc509d94e7ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlyList")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlyList")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
