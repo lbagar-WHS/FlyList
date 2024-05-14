@@ -8,9 +8,9 @@ namespace FlyList.Controllers
     public class ProductController : ControllerBase
     {
         [HttpGet]
-        public List<Product> GetAllProducts()
+        public IActionResult GetAllProducts()
         {
-            return new List<Product>();
+            return Ok(new List<Product>());
         }
 
         [HttpPost]
@@ -21,6 +21,12 @@ namespace FlyList.Controllers
 
         [HttpPut]
         public IActionResult ModifyProduct([FromBody] Product product)
+        {
+            return Ok("");
+        }
+
+        [HttpDel]
+        public IActionResult DeleteProduct(Guid productId)
         {
             return Ok("");
         }
