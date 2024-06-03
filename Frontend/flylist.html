@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyList</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>FlyList</h1>
+    </header>
+
+
+    <section id="einkaufsliste" class="category">
+        <h2>Einkaufsliste</h2>
+        <ul class="collapsible">
+            
+            <li>
+                <div class="collapsible-header" id = "category1">Kategorie 1</div>
+                <ul class="collapsible-body">
+                    <li><input type="checkbox"> Punkt 1</li>
+                    <li><input type="checkbox"> Punkt 2</li>
+                </ul>
+            </li>
+            <li>
+                <div class="collapsible-header" id = "category2">Kategorie 2</div>
+                <ul class="collapsible-body">
+                    <li><input type="checkbox"> Punkt 3</li>
+                    <li><input type="checkbox"> Punkt 4</li>
+                </ul>
+            </li>
+        </ul>
+        <button onclick="openAddPoint('einkaufsliste')">Punkt hinzufügen</button>
+        <button onclick="readJson()">Json lesen</button>
+    </section>
+
+
+    <div id="addPoint" class="addPoint">
+        <div class="addPoint-content">
+            <span class="close" onclick="closeAddPoint()">&times;</span>
+            <h2>Neuen Punkt hinzufügen</h2>
+            <select name="newPointcategorie" id="newPointcategorie">
+                <option value="category1">Kategorie 1</option>
+                <option value="category2">Kategorie 2</option>
+            </select>
+            <input type="text" id="newPointName" placeholder="Name des neuen Punkts">
+            <button onclick="addNewPoint()">Hinzufügen</button>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
