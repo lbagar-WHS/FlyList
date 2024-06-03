@@ -19,20 +19,20 @@
             
             <li>
                 <div class="collapsible-header" id = "category1">Kategorie 1</div>
-                <ul class="collapsible-body">
+                <ul class="collapsible-body" id = "category1list">
                     <li><input type="checkbox"> Punkt 1</li>
                     <li><input type="checkbox"> Punkt 2</li>
                 </ul>
             </li>
             <li>
                 <div class="collapsible-header" id = "category2">Kategorie 2</div>
-                <ul class="collapsible-body">
+                <ul class="collapsible-body" id = "category2list">
                     <li><input type="checkbox"> Punkt 3</li>
                     <li><input type="checkbox"> Punkt 4</li>
                 </ul>
             </li>
         </ul>
-        <button onclick="openAddPoint('einkaufsliste')">Punkt hinzufügen</button>
+        <button onclick="openAddPoint()">Punkt hinzufügen</button>
         <button onclick="readJson()">Json lesen</button>
     </section>
 

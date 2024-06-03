@@ -5,10 +5,9 @@ document.querySelectorAll('.collapsible-header').forEach(header => {
     });
 });
 
-let currentSectionId;
 
-function openAddPoint(sectionId) {
-    currentSectionId = sectionId;
+
+function openAddPoint() {
     document.getElementById('addPoint').style.display = 'flex';
 }
 
@@ -21,14 +20,14 @@ function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistier
     const newPointName = document.getElementById('newPointName').value;
     const newPointcategorie = document.getElementById('newPointcategorie').value;
     if (newPointName.trim() !== '') {
-        const section = document.getElementById(currentSectionId);
-        const collapsibleBody = section.querySelector('.collapsible-body');
+        const section = document.getElementById(newPointcategorie+'list');
+        //const collapsibleBody = section.querySelector('.collapsible-body');
         const newItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         newItem.appendChild(checkbox);
         newItem.appendChild(document.createTextNode(' ' + newPointName));
-        collapsibleBody.appendChild(newItem);
+        section.appendChild(newItem);
         closeAddPoint();
     } else {
         alert('Bitte geben Sie einen Namen für den neuen Punkt ein.');
