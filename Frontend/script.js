@@ -21,7 +21,6 @@ function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistier
     const newPointcategorie = document.getElementById('newPointcategorie').value;
     if (newPointName.trim() !== '') {
         const section = document.getElementById(newPointcategorie+'list');
-        //const collapsibleBody = section.querySelector('.collapsible-body');
         const newItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -34,6 +33,9 @@ function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistier
     }
 }
 
+window.onload = () => {readJson();}
+
+
 function readJson() {
     const data = {
         "productlist": [
@@ -45,6 +47,7 @@ function readJson() {
                     "name": "Milch",
                     "description": "Eine Tetrapackung",
                     "category": 1,
+                    "categoryName": "Milch",
                     "standardamount": 1
                 }
             },
@@ -56,6 +59,7 @@ function readJson() {
                     "name": "Hafermilch",
                     "description": "Eine Tetrapackung",
                     "category": 1,
+                    "categoryName": "Milch",
                     "standardamount": 1
                 }
             },
@@ -67,6 +71,7 @@ function readJson() {
                     "name": "Karrotte",
                     "description": "1kg",
                     "category": 2,
+                    "categoryName": "Gemüse",
                     "standardamount": 4
                 }
             },
@@ -78,14 +83,32 @@ function readJson() {
                     "name": "Chips",
                     "description": "175g Packung",
                     "category": 3,
+                    "categoryName": "Snacks",
                     "standardamount": 2
                 }
             }
         ]
     };
 
-    
-        console.log(data.productlist[0].product.name);  // Gibt "Max Mustermann" aus
-        console.log(data.productlist[0].product.category);   // Gibt 30 aus
+        data.productlist.forEach((product)=>{
+
+            /* Die Kategorien auch auslesen: Klappt noch nicht.
+            const section1 = document.getElementById('einkaufsliste');
+            const newItem1 = document.createElement('div');
+            newItem1.id = 'einkaufsliste'+product.product.id;
+            newItem1.classList.add('collapsible-body');
+            newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
+            section1.appendChild(newItem1);*/
+            
+
+
+        const section = document.getElementById('category'+product.product.category+'list');
+        const newItem = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        newItem.appendChild(checkbox);
+        newItem.appendChild(document.createTextNode(' ' + product.product.name));
+        section.appendChild(newItem);
+        })
 
 }
