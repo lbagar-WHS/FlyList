@@ -1,9 +1,10 @@
-document.querySelectorAll('.collapsible-header').forEach(header => {
+/*document.querySelectorAll('.collapsible-header').forEach(header => {
     header.addEventListener('click', () => {
         const body = header.nextElementSibling;
         body.style.display = body.style.display === 'none' ? 'block' : 'none';
     });
-});
+});*/
+
 
 
 
@@ -33,7 +34,44 @@ function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistier
     }
 }
 
-window.onload = () => {readJson();}
+window.onload = () => {
+    readJson(); 
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const body = header.nextElementSibling;
+           if (item.style.display === "none") {
+                item.style.display = "block";
+                } else {
+                item.style.display = "none";
+                }
+                
+            // über Klassen machen
+            // Waren Korb Preis minimieren -> Angeboten im Inernet abfragen
+        });
+    });
+    /*document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', event => {
+          // Klasse 'hidden' ein- oder ausblenden
+          const body = header.nextElementSibling;
+          body.classList.toggle('hidden');
+        });
+      });*/
+
+      /*document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', () => {
+          // Finde das nächste Element mit der Klasse "collapsible-body"
+          let body = header.nextElementSibling;
+          
+          // Wenn das nächste Element existiert und die Klasse "collapsible-body" hat
+          if (body && body.classList.contains('collapsible-body')) {
+            // Schalte die Klasse "hidden" ein oder aus
+            body.classList.toggle('hidden');
+          }
+        });
+      });*/
+
+    
+}
 
 
 function readJson() {
@@ -90,25 +128,85 @@ function readJson() {
         ]
     };
 
-        data.productlist.forEach((product)=>{
+        /*data.productlist.forEach((product)=>{
 
             /* Die Kategorien auch auslesen: Klappt noch nicht.
-            const section1 = document.getElementById('einkaufsliste');
+            //let section12 = document.querySelector("einkaufsliste");
+            const collapsibleList = document.getElementById('allList');
+        //const section = document.getElementById('category'+product.product.category+'list');
+
+            //const section1 = document.getElementById('einkaufsliste');
+            const newList2 = document.createElement('li');
             const newItem1 = document.createElement('div');
-            newItem1.id = 'einkaufsliste'+product.product.id;
-            newItem1.classList.add('collapsible-body');
+            newItem1.classList.add('collapsible-header');
+            newItem1.id = 'category'+product.product.id;
+            const newList1 = document.createElement('ul');
+            newList1.classList.add('collapsible-body');
+            newList1.id = 'category'+product.product.category+'lists';
             newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
-            section1.appendChild(newItem1);*/
-            
+            newItem1.appendChild(newList1);
+            newList2.appendChild(newItem1);
+            collapsibleList.appendChild(newList2);
+ 
 
-
-        const section = document.getElementById('category'+product.product.category+'list');
+        const section = document.getElementById('category'+product.product.category+'lists');
         const newItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         newItem.appendChild(checkbox);
         newItem.appendChild(document.createTextNode(' ' + product.product.name));
         section.appendChild(newItem);
+        })*/
+
+        data.productlist.forEach((product)=>{
+
+            const collapsibleList = document.getElementById('allList');
+        //const section = document.getElementById('category'+product.product.category+'list');
+
+            //const section1 = document.getElementById('einkaufsliste');
+            const newList2 = document.createElement('li');
+            const newItem1 = document.createElement('div');
+            newItem1.classList.add('collapsible-header');
+            newItem1.id = 'category'+product.product.id;
+            const newList1 = document.createElement('ul');
+            newList1.classList.add('collapsible-body');
+            newList1.id = 'category'+product.product.category+'lists';
+            newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
+            newItem1.appendChild(newList1);
+            newList2.appendChild(newItem1);
+            collapsibleList.appendChild(newList2);
+
+
+
+            const section = document.getElementById('category'+product.product.category+'lists');
+            const newItem = document.createElement('li');
+ 
+ 
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+ 
+ 
+            const number = document.createElement('span');
+            number.contentEditable = true;
+            number.innerText = product.amount;
+ 
+ 
+            number.addEventListener('keydown', (event) => {
+                if ((event.key >= '0' && event.key <= '9') ||
+                    event.key === 'Backspace' ||
+                    event.key === 'ArrowLeft' ||
+                    event.key === 'ArrowRight') {
+                } else {
+                    event.preventDefault();
+                }
+            });
+ 
+ 
+            newItem.appendChild(checkbox);
+            newItem.appendChild(number);
+            newItem.appendChild(document.createTextNode(' ' + product.product.name));       
+            section.appendChild(newItem);
         })
+ 
 
 }
