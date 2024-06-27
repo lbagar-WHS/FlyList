@@ -1,35 +1,73 @@
 ﻿using FlyList.Models;
+using FlyList.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlyList.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController(ProductRepository productRepository) : ControllerBase
     {
         [HttpGet]
         public IActionResult GetAllProducts()
         {
-            return Ok(new List<Product>());
+            var products = productRepository.GetAll();
+            return Ok(products);
         }
 
         [HttpPost]
-        public IActionResult AddProduct([FromBody]Product newProduct)
+        public IActionResult AddProduct([FromBody] Product newProduct)
         {
-            return Ok("");
+            if (newProduct == null)
+            {
+                return BadRequest("Product is null.");
+            }
+
+            productRepository.Create(newProduct);
+            return CreatedAtAction(nameof(GetProductById), new { id = newProduct.Key }, newProduct);
         }
 
-        [HttpPut]
-        public IActionResult ModifyProduct([FromBody] Product product)
+        [HttpPut("{id}")]
+        public IActionResult ModifyProduct(Guid id, [FromBody] Product updatedProduct)
         {
-            return Ok("");
+            if (updatedProduct == null || updatedProduct.Key != id)
+            {
+                return BadRequest("Product is null or ID mismatch.");
+            }
+
+            var existingProduct = productRepository.Read(id);
+            if (existingProduct == null)
+            {
+                return NotFound("The Product record couldn't be found.");
+            }
+
+            productRepository.Update(updatedProduct);
+            return NoContent();
         }
 
-        [HttpDel]
-        public IActionResult DeleteProduct(Guid productId)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(Guid id)
         {
-            return Ok("");
+            var product = productRepository.Read(id);
+            if (product == null)
+            {
+                return NotFound("The Product record couldn't be found.");
+            }
+
+            productRepository.Delete(id);
+            return NoContent();
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(Guid id)
+        {
+            var product = productRepository.Read(id);
+            if (product == null)
+            {
+                return NotFound("The Product record couldn't be found.");
+            }
+
+            return Ok(product);
+        }
     }
 }

@@ -6,17 +6,17 @@ namespace FlyList.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ListItemController(ListItemRepository listItemRepository) : ControllerBase
+    public class FlyItemListController(ListItemRepository listItemRepository, FlyItemListRepository flyItemListRepository) : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetAllListItems()
+        public IActionResult GetAllFlyListItems()
         {
             var listItems = listItemRepository.GetAll();
             return Ok(listItems);
         }
 
         [HttpPost]
-        public IActionResult AddListItem([FromBody] ListItem newListItem)
+        public IActionResult AddFlyListItem([FromBody] ListItem newListItem)
         {
             if (newListItem == null)
             {
@@ -24,13 +24,13 @@ namespace FlyList.Controllers
             }
 
             listItemRepository.Create(newListItem);
-            return CreatedAtAction(nameof(GetListItemById), new { id = newListItem.Key }, newListItem);
+            return CreatedAtAction(nameof(GetListItemById), new { id = newListItem.Id }, newListItem);
         }
 
         [HttpPut("{id}")]
         public IActionResult ModifyListItem(Guid id, [FromBody] ListItem updatedListItem)
         {
-            if (updatedListItem == null || updatedListItem.Key != id)
+            if (updatedListItem == null || updatedListItem.Id != id)
             {
                 return BadRequest("ListItem is null or ID mismatch.");
             }
@@ -64,7 +64,7 @@ namespace FlyList.Controllers
             var allItems = listItemRepository.GetAll();
             foreach (var item in allItems)
             {
-                listItemRepository.Delete(item.Key);
+                listItemRepository.Delete(item.Id);
             }
 
             return NoContent();
