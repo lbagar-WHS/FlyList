@@ -17,22 +17,6 @@
     
         <h2>Einkaufsliste</h2>
         <ul class="collapsible" id = "allList">
-            
-            <li>
-                <div class="collapsible-header" id = "category1">Kategorie 1</div>
-                <ul class="collapsible-body" id = "category1list">
-                </ul>
-            </li>
-            <li>
-                <div class="collapsible-header" id = "category2">Kategorie 2</div>
-                <ul class="collapsible-body" id = "category2list">
-                </ul>
-            </li>
-            <li>
-                <div class="collapsible-header" id = "category3">Kategorie 3</div>
-                <ul class="collapsible-body" id = "category3list">
-                </ul>
-            </li>
         </ul>
         <button onclick="openAddPoint()">Punkt hinzufügen</button>
     </section>
@@ -43,8 +27,7 @@
             <span class="close" onclick="closeAddPoint()">&times;</span>
             <h2>Neuen Punkt hinzufügen</h2>
             <select name="newPointcategorie" id="newPointcategorie">
-                <option value="category1">Kategorie 1</option>
-                <option value="category2">Kategorie 2</option>
+                
             </select>
             <input type="text" id="newPointName" placeholder="Name des neuen Punkts">
             <button onclick="addNewPoint()">Hinzufügen</button>

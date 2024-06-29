@@ -10,6 +10,27 @@
 
 function openAddPoint() {
     document.getElementById('addPoint').style.display = 'flex';
+
+                const selectElement = document.getElementById('newPointcategorie');
+            
+                selectElement.options.length = 0;
+
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = 'Kategorie Auswahl';
+                defaultOption.value = ''; // Setze den Wert entsprechend, falls benötigt
+                defaultOption.selected = true;
+                defaultOption.disabled = true;
+    
+                // Füge die Option zum Select-Element hinzu
+                selectElement.appendChild(defaultOption);
+                listOfProductCategory.forEach((category)=>{
+                    const newOption = document.createElement('option');
+                    newOption.value = category;
+                    newOption.text = category;
+                    newOption.id = category;
+                    selectElement.add(newOption);
+            }
+        );
 }
 
 function closeAddPoint() {
@@ -21,7 +42,7 @@ function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistier
     const newPointName = document.getElementById('newPointName').value;
     const newPointcategorie = document.getElementById('newPointcategorie').value;
     if (newPointName.trim() !== '') {
-        const section = document.getElementById(newPointcategorie+'list');
+        const section = document.getElementById('category'+newPointcategorie+'list');
         const newItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -73,7 +94,7 @@ window.onload = () => {
     
 }
 
-
+const listOfProductCategory = [""];
 function readJson() {
     const data = {
         "productlist": [
@@ -128,57 +149,28 @@ function readJson() {
         ]
     };
 
-        /*data.productlist.forEach((product)=>{
+        data.productlist.forEach((product )=>{
 
-            /* Die Kategorien auch auslesen: Klappt noch nicht.
-            //let section12 = document.querySelector("einkaufsliste");
+            if (!listOfProductCategory.includes(product.product.categoryName)){
+                listOfProductCategory.push(product.product.categoryName);
             const collapsibleList = document.getElementById('allList');
-        //const section = document.getElementById('category'+product.product.category+'list');
 
-            //const section1 = document.getElementById('einkaufsliste');
             const newList2 = document.createElement('li');
             const newItem1 = document.createElement('div');
             newItem1.classList.add('collapsible-header');
             newItem1.id = 'category'+product.product.id;
             const newList1 = document.createElement('ul');
             newList1.classList.add('collapsible-body');
-            newList1.id = 'category'+product.product.category+'lists';
+            newList1.id = 'category'+product.product.categoryName+'list';
             newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
             newItem1.appendChild(newList1);
             newList2.appendChild(newItem1);
             collapsibleList.appendChild(newList2);
- 
-
-        const section = document.getElementById('category'+product.product.category+'lists');
-        const newItem = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        newItem.appendChild(checkbox);
-        newItem.appendChild(document.createTextNode(' ' + product.product.name));
-        section.appendChild(newItem);
-        })*/
-
-        data.productlist.forEach((product)=>{
-
-            const collapsibleList = document.getElementById('allList');
-        //const section = document.getElementById('category'+product.product.category+'list');
-
-            //const section1 = document.getElementById('einkaufsliste');
-            const newList2 = document.createElement('li');
-            const newItem1 = document.createElement('div');
-            newItem1.classList.add('collapsible-header');
-            newItem1.id = 'category'+product.product.id;
-            const newList1 = document.createElement('ul');
-            newList1.classList.add('collapsible-body');
-            newList1.id = 'category'+product.product.category+'lists';
-            newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
-            newItem1.appendChild(newList1);
-            newList2.appendChild(newItem1);
-            collapsibleList.appendChild(newList2);
+            }
 
 
 
-            const section = document.getElementById('category'+product.product.category+'lists');
+            const section = document.getElementById('category'+product.product.categoryName+'list');
             const newItem = document.createElement('li');
  
  
@@ -206,6 +198,7 @@ function readJson() {
             newItem.appendChild(number);
             newItem.appendChild(document.createTextNode(' ' + product.product.name));       
             section.appendChild(newItem);
+            
         })
  
 
