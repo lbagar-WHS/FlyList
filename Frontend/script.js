@@ -1,13 +1,3 @@
-/*document.querySelectorAll('.collapsible-header').forEach(header => {
-    header.addEventListener('click', () => {
-        const body = header.nextElementSibling;
-        body.style.display = body.style.display === 'none' ? 'block' : 'none';
-    });
-});*/
-
-
-
-
 function openAddPoint() {
     document.getElementById('addPoint').style.display = 'flex';
 
@@ -70,32 +60,36 @@ window.onload = () => {
             // Waren Korb Preis minimieren -> Angeboten im Inernet abfragen
         });
     });
-    /*document.querySelectorAll('.collapsible-header').forEach(header => {
-        header.addEventListener('click', event => {
-          // Klasse 'hidden' ein- oder ausblenden
-          const body = header.nextElementSibling;
-          body.classList.toggle('hidden');
-        });
-      });*/
-
-      /*document.querySelectorAll('.collapsible-header').forEach(header => {
-        header.addEventListener('click', () => {
-          // Finde das nächste Element mit der Klasse "collapsible-body"
-          let body = header.nextElementSibling;
-          
-          // Wenn das nächste Element existiert und die Klasse "collapsible-body" hat
-          if (body && body.classList.contains('collapsible-body')) {
-            // Schalte die Klasse "hidden" ein oder aus
-            body.classList.toggle('hidden');
-          }
-        });
-      });*/
-
-    
 }
+
+function readJsonServer() {
+// Der Endpunkt, an den die GET-Anfrage gesendet wird
+const url = 'https://api.example.com/flyitemlist';
+
+// Die GET-Anfrage mit der fetch-API durchführen
+fetch(url)
+  .then(response => {
+    // Überprüfen, ob die Antwort erfolgreich war
+    if (!response.ok) {
+      throw new Error('Netzwerk-Antwort war nicht ok');
+    }
+    return response.json(); // Die Antwort in ein JSON-Objekt umwandeln
+  })
+  .then(data => {
+    // Mit den erhaltenen Daten arbeiten
+    console.log(data);
+  })
+  .catch(error => {
+    // Fehlerbehandlung
+    console.error('Es gab ein Problem mit der Fetch-Operation:', error);
+  });
+}
+
 
 const listOfProductCategory = [""];
 function readJson() {
+    const dataServer = readJsonServer();
+
     const data = {
         "productlist": [
             {
