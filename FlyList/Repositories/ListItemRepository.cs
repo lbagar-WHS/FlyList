@@ -19,7 +19,7 @@ namespace FlyList.Repositories
 
         public ListItem Read(Guid id)
         {
-            return _context.ListItems.Include(li => li.Product).FirstOrDefault(li => li.Key == id);
+            return _context.ListItems.Include(li => li.Product).FirstOrDefault(li => li.Id == id);
         }
 
         public void Update(ListItem listItem)

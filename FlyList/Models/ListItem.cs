@@ -4,7 +4,8 @@
     {
         public bool IsBought { get; set; }
         public int Amount { get; set; }
+        public Guid ProductId { get; set; }
 
-        public required Product Product { get; set; }
+        public Product Product { get; set; } = new();
     }
 }

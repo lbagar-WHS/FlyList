@@ -24,13 +24,13 @@ namespace FlyList.Controllers
             }
 
             productRepository.Create(newProduct);
-            return CreatedAtAction(nameof(GetProductById), new { id = newProduct.Key }, newProduct);
+            return CreatedAtAction(nameof(GetProductById), new { id = newProduct.Id }, newProduct);
         }
 
         [HttpPut("{id}")]
         public IActionResult ModifyProduct(Guid id, [FromBody] Product updatedProduct)
         {
-            if (updatedProduct == null || updatedProduct.Key != id)
+            if (updatedProduct == null || updatedProduct.Id != id)
             {
                 return BadRequest("Product is null or ID mismatch.");
             }

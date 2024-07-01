@@ -13,7 +13,7 @@ namespace FlyList.Controllers
             {
                 var category = new Category { Name = name };
                 categoryRepository.Create(category);
-                return CreatedAtAction(nameof(GetCategoryById), new { id = category.Key }, category);
+                return CreatedAtAction(nameof(GetCategoryById), new { id = category.Id }, category);
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace FlyList.Controllers
         [HttpPut("{id}")]
         public IActionResult ModifyCategory(Guid id, [FromBody] Category category)
         {
-            if (category == null || category.Key != id)
+            if (category == null || category.Id != id)
             {
                 return BadRequest("Category is null or ID mismatch.");
             }

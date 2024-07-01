@@ -12,7 +12,7 @@ namespace FlyList
         public DbSet<FlyItemList> FlyItemLists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("YourConnectionStringHere");
+            optionsBuilder.UseNpgsql("Host=raspberrypi;Username=postgres;Password=sa");
         }
     }
 }

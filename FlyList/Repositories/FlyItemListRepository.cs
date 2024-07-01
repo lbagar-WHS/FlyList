@@ -18,7 +18,7 @@ namespace FlyList.Repositories
         {
             return _context.FlyItemLists
                 .Include(fl => fl.FlyItems)
-                .FirstOrDefault(fl => fl.Key == id);
+                .FirstOrDefault(fl => fl.Id == id);
         }
 
         public void Update(FlyItemList flyList)
