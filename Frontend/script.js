@@ -181,6 +181,16 @@ function readJson() {
             const number = document.createElement('span');
             number.contentEditable = true;
             number.innerText = product.amount;
+
+            const infoButton = document.createElement('button');
+            infoButton.classList.add('info-button');
+            const i = document.createTextNode('i');
+            infoButton.appendChild(i);
+            const infoText = document.createElement('div');
+            infoText.classList.add('info-text');
+            const text = document.createTextNode(product.product.description);
+            infoText.appendChild(text);
+            infoButton.appendChild(infoText);
  
  
             number.addEventListener('keydown', (event) => {
@@ -196,7 +206,8 @@ function readJson() {
  
             newItem.appendChild(checkbox);
             newItem.appendChild(number);
-            newItem.appendChild(document.createTextNode(' ' + product.product.name));       
+            newItem.appendChild(document.createTextNode(' ' + product.product.name));
+            newItem.appendChild(infoButton);
             section.appendChild(newItem);
             
         })
