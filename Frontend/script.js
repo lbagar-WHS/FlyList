@@ -145,6 +145,18 @@ function readJson() {
                     "categoryName": "Snacks",
                     "standardamount": 2
                 }
+            },
+            {
+                "isBought": false,
+                "amount": 1,
+                "product": {
+                    "id": "fgb7t7i4",
+                    "name": "Zahnstocher",
+                    "description": "Zahnstocher",
+                    "category": 0,
+                    "categoryName": "Sonstiges",
+                    "standardamount": 1
+                }
             }
         ]
     };
