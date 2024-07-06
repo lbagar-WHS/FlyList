@@ -2,6 +2,6 @@
 {
     public class Category : SqlEntity
     {
-        public required string Name { get; set; }
+        public string Name { get; set; }
     }
 }

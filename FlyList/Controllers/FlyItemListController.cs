@@ -6,29 +6,31 @@ namespace FlyList.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ListItemController(ListItemRepository listItemRepository) : ControllerBase
+    public class FlyItemListController(ListItemRepository listItemRepository, FlyItemListRepository flyItemListRepository) : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetAllListItems()
+        [HttpGet("{id}")]
+        public IActionResult GetAllFlyListItemsById(Guid id)
         {
-            var listItems = listItemRepository.GetAll();
+            var listItems = flyItemListRepository.Read(id);
             return Ok(listItems);
         }
 
         [HttpPost]
-        public IActionResult AddListItem([FromBody] ListItem newListItem)
+        public IActionResult AddFlyListItem([FromBody] FlyItemList flyItemList, ListItem listItem)
         {
-            if (newListItem == null)
+            if (listItem == null)
             {
                 return BadRequest("ListItem is null.");
             }
 
-            listItemRepository.Create(newListItem);
-            return CreatedAtAction(nameof(GetListItemById), new { id = newListItem.Id }, newListItem);
+            flyItemList.FlyItems.Add(listItem);
+
+            flyItemListRepository.Update(flyItemList);
+            return CreatedAtAction(nameof(GetListItemById), new { id = flyItemList.Id }, flyItemList);
         }
 
         [HttpPut("{id}")]
-        public IActionResult ModifyListItem(Guid id, [FromBody] ListItem updatedListItem)
+        public IActionResult ModifyFlyListItem(Guid id, [FromBody] ListItem updatedListItem)
         {
             if (updatedListItem == null || updatedListItem.Id != id)
             {
@@ -46,13 +48,14 @@ namespace FlyList.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteListItem(Guid id)
+        public IActionResult DeleteFlyListItem(Guid id)
         {
             var listItem = listItemRepository.Read(id);
             if (listItem == null)
             {
                 return NotFound("The ListItem record couldn't be found.");
             }
+
 
             listItemRepository.Delete(id);
             return NoContent();
@@ -70,7 +73,7 @@ namespace FlyList.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("listitem/{id}")]
         public IActionResult GetListItemById(Guid id)
         {
             var listItem = listItemRepository.Read(id);
