@@ -18,16 +18,16 @@
 	<button onclick="openAddPoint()">Punkt hinzufügen</button>
 </section>
 
-<form id="addPoint" class="addPoint" method="post" data-ajax="true" data-ajax-url="/?handler=SaveListItem" data-ajax-method="post" data-ajax-success="success" data-ajax-failure="fail">
+<div id="addPoint" class="addPoint">
 	<div class="addPoint-content">
 		<span class="close" onclick="closeAddPoint()">&times;</span>
 		<h2>Neuen Punkt hinzufügen</h2>
 		<select name="newPointcategorie" id="newPointcategorie">
 		</select>
 		<input type="text" id="newPointName" placeholder="Name des neuen Punkts">
-		<button type="submit">Hinzufügen</button>
+		<button onclick="addNewPoint()">Hinzufügen</button>
 	</div>
-</form>
+</div>
 @Html.HiddenFor(m => m.Categories)
 @foreach (var item in Model.FlyItemList.FlyItems)
 {
@@ -91,8 +91,8 @@
 		}
 
 		function success() {
-			setData();
-			populateForm();
+			// setData();
+			// populateForm();
 		}
 
 		function fail() {

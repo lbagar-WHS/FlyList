@@ -99,6 +99,10 @@ namespace FlyListRazor.Pages
 			//FlyItemList flyItemList = _flyItemListRepository.GetAll().FirstOrDefault();
 			//flyItemList.FlyItems.Remove(listItem1);
 			//_flyItemListRepository.Update(flyItemList);
+
+			Categories = _categoryRepository.GetAll().ToList();
+
+			FlyItemList = _flyItemListRepository.GetAll().FirstOrDefault();
 		}
 
 		public void OnGetAsync()
