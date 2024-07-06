@@ -1,0 +1,398 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+
+<header>
+	<img src="~/images/Logo.png" alt="Logo" class="logo">
+	<h1>FlyList</h1>
+</header>
+
+
+<section id="einkaufsliste" class="category">
+
+	<h2>Einkaufsliste</h2>
+	<ul class="collapsible" id="allList">
+	</ul>
+	<button onclick="openAddPoint()">Punkt hinzufügen</button>
+</section>
+
+<form id="addPoint" class="addPoint" method="post" data-ajax="true" data-ajax-url="/?handler=SaveListItem" data-ajax-method="post" data-ajax-success="success" data-ajax-failure="fail">
+	<div class="addPoint-content">
+		<span class="close" onclick="closeAddPoint()">&times;</span>
+		<h2>Neuen Punkt hinzufügen</h2>
+		<select name="newPointcategorie" id="newPointcategorie">
+		</select>
+		<input type="text" id="newPointName" placeholder="Name des neuen Punkts">
+		<button type="submit">Hinzufügen</button>
+	</div>
+</form>
+@Html.HiddenFor(m => m.Categories)
+@foreach (var item in Model.FlyItemList.FlyItems)
+{
+	<input type="hidden" class="fly-item" data-id="@item.Id" data-name="@item.Product.Name" data-amount="@item.Amount" data-description="@item.Product.Description" data-isBought="@item.IsBought" data-categoryid="@item.Product.Category.Id" data-categoryname="@item.Product.Category.Name" />
+}
+
+@foreach (var item in Model.Categories)
+{
+	<input type="hidden" class="category-item" data-id="@item.Id" data-name="@item.Name" />
+}
+
+
+@section Scripts {
+
+
+	<script>
+		var flyItemList = [];
+		var categories = [];
+		var activeCategories = [];
+
+		$(document).ready(function () {
+			// Initialize an array to store the objects
+			setData();
+			populateForm();
+		});
+
+		function setData(){
+			$('.category-item').each(function () {
+				var flyItem = {
+					id: $(this).data('id'),
+					name: $(this).data('name')
+				};
+				// Add the object to the array
+				categories.push(flyItem);
+			});
+
+			// Iterate over each hidden input with the class 'fly-item'
+			$('.fly-item').each(function () {
+				var flyItem = {
+					id: $(this).data('id'),
+					name: $(this).data('name'),
+					isBought: $(this).data('isBought'),
+					description: $(this).data('description'),
+					amount: $(this).data('amount'),
+					categoryId: $(this).data('categoryid'),
+					categoryName: $(this).data('categoryname'),
+				};
+				// Add the object to the array
+				flyItemList.push(flyItem);
+			});
+
+			
+
+			// Log the array of objects to the console
+			console.log(flyItemList);
+			console.log(categories);
+		}
+
+		function begin(){
+			addNewPoint();
+		}
+
+		function success() {
+			setData();
+			populateForm();
+		}
+
+		function fail() {
+			alert('Failed to save ListItem');
+		}
+
+		function populateForm(){
+			flyItemList.forEach((listItem) => {
+
+				var cat = categories.find(function (category) {
+					return category.id === listItem.categoryId
+				});
+
+				if (!activeCategories.includes(cat)) {
+					activeCategories.push(cat);
+					const collapsibleList = document.getElementById('allList');
+
+					const newList2 = document.createElement('li');
+					const newItem1 = document.createElement('div');
+					newItem1.classList.add('collapsible-header');
+					newItem1.id = 'category' + listItem.id;
+					const newList1 = document.createElement('ul');
+					newList1.classList.add('collapsible-body');
+					newList1.id = 'category' + listItem.categoryId + 'list';
+					newItem1.appendChild(document.createTextNode(' ' + listItem.categoryName));
+					newItem1.appendChild(newList1);
+					newList2.appendChild(newItem1);
+					collapsibleList.appendChild(newList2);
+				}
+
+				const section = document.getElementById('category' + listItem.categoryId + 'list');
+				const newItem = document.createElement('li');
+
+				const checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+
+				const number = document.createElement('span');
+				number.contentEditable = true;
+				number.innerText = listItem.amount;
+
+				const infoButton = document.createElement('button');
+				infoButton.classList.add('info-button');
+				const i = document.createTextNode('i');
+				infoButton.appendChild(i);
+				const infoText = document.createElement('div');
+				infoText.classList.add('info-text');
+				const text = document.createTextNode(listItem.description);
+				infoText.appendChild(text);
+				infoButton.appendChild(infoText);
+
+				number.addEventListener('keydown', (event) => {
+					if ((event.key >= '0' && event.key <= '9') ||
+						event.key === 'Backspace' ||
+						event.key === 'ArrowLeft' ||
+						event.key === 'ArrowRight') {
+					} else {
+						event.preventDefault();
+					}
+				});
+
+				newItem.appendChild(checkbox);
+				newItem.appendChild(number);
+				newItem.appendChild(document.createTextNode(' ' + listItem.name));
+				newItem.appendChild(infoButton);
+				section.appendChild(newItem);
+			})
+		}
+
+		function openAddPoint() {
+			document.getElementById('addPoint').style.display = 'flex';
+
+			const selectElement = document.getElementById('newPointcategorie');
+
+			selectElement.options.length = 0;
+
+			const defaultOption = document.createElement('option');
+			defaultOption.textContent = 'Kategorie Auswahl';
+			defaultOption.value = ''; // Setze den Wert entsprechend, falls benötigt
+			defaultOption.selected = true;
+			defaultOption.disabled = true;
+
+			// Füge die Option zum Select-Element hinzu
+			selectElement.appendChild(defaultOption);
+			activeCategories.forEach((category) => {
+				const newOption = document.createElement('option');
+				newOption.value = category.name;
+				newOption.text = category.name;
+				newOption.id = category.id;
+				selectElement.add(newOption);
+			}
+			);
+		}
+
+		function closeAddPoint() {
+			document.getElementById('addPoint').style.display = 'none';
+			document.getElementById('newPointName').value = '';
+		}
+
+		function addNewPoint() {//abfragen, ob dieser Punkt schon in der Liste exzistiert
+			const newPointName = document.getElementById('newPointName').value;
+			const newPointcategorie = document.getElementById('newPointcategorie').value
+			console.log(newPointcategorie);
+			console.log(newPointName);
+
+			if (newPointName.trim() !== '') {
+				var chosenCategory = activeCategories.find(function (category) {
+					return category.name === newPointcategorie
+				})
+				const section = document.getElementById('category' + chosenCategory.id + 'list');
+				const newItem = document.createElement('li');
+				const checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+				newItem.appendChild(checkbox);
+				newItem.appendChild(document.createTextNode(' ' + newPointName));
+				section.appendChild(newItem);
+				// SaveNewPoint(newPointName, chosenCategory.id);
+				closeAddPoint();
+			} else {
+				alert('Bitte geben Sie einen Namen für den neuen Punkt ein.');
+			}
+		}
+
+		
+
+		window.onload = () => {
+			document.querySelectorAll('.collapsible-header').forEach(header => {
+				header.addEventListener('click', () => {
+					const body = header.nextElementSibling;
+					if (item.style.display === "none") {
+						item.style.display = "block";
+					} else {
+						item.style.display = "none";
+					}
+
+					// über Klassen machen
+					// Waren Korb Preis minimieren -> Angeboten im Inernet abfragen
+				});
+			});
+		}
+
+		// function readJsonServer() {
+		// 	// Der Endpunkt, an den die GET-Anfrage gesendet wird
+		// 	const url = 'https://localhost:44352/flyitemlist';
+
+		// 	// Die GET-Anfrage mit der fetch-API durchführen
+		// 	fetch(url)
+		// 		.then(response => {
+		// 			// Überprüfen, ob die Antwort erfolgreich war
+		// 			if (!response.ok) {
+		// 				throw new Error('Netzwerk-Antwort war nicht ok');
+		// 			}
+		// 			return response.json(); // Die Antwort in ein JSON-Objekt umwandeln
+		// 		})
+		// 		.then(data => {
+		// 			// Mit den erhaltenen Daten arbeiten
+		// 			console.log(data);
+		// 		})
+		// 		.catch(error => {
+		// 			// Fehlerbehandlung
+		// 			console.error('Es gab ein Problem mit der Fetch-Operation:', error);
+		// 		});
+		// }
+
+
+		// function readJson() {
+			// const dataServer = readJsonServer();
+			// console.log(dataServer);
+
+			// const data = {
+			//     "productlist": [
+			//         {
+			//             "isBought": false,
+			//             "amount": 3,
+			//             "product": {
+			//                 "id": "85763098576",
+			//                 "name": "Milch",
+			//                 "description": "Eine Tetrapackung",
+			//                 "category": 1,
+			//                 "categoryName": "Milch",
+			//                 "standardamount": 1
+			//             }
+			//         },
+			//         {
+			//             "isBought": true,
+			//             "amount": 1,
+			//             "product": {
+			//                 "id": "0874956",
+			//                 "name": "Hafermilch",
+			//                 "description": "Eine Tetrapackung",
+			//                 "category": 1,
+			//                 "categoryName": "Milch",
+			//                 "standardamount": 1
+			//             }
+			//         },
+			//         {
+			//             "isBought": true,
+			//             "amount": 2,
+			//             "product": {
+			//                 "id": "dafhslu87",
+			//                 "name": "Karrotte",
+			//                 "description": "1kg",
+			//                 "category": 2,
+			//                 "categoryName": "Gemüse",
+			//                 "standardamount": 4
+			//             }
+			//         },
+			//         {
+			//             "isBought": false,
+			//             "amount": 2,
+			//             "product": {
+			//                 "id": "fgb7t7i4",
+			//                 "name": "Chips",
+			//                 "description": "175g Packung",
+			//                 "category": 3,
+			//                 "categoryName": "Snacks",
+			//                 "standardamount": 2
+			//             }
+			//         },
+			//         {
+			//             "isBought": false,
+			//             "amount": 1,
+			//             "product": {
+			//                 "id": "fgb7t7i4",
+			//                 "name": "Zahnstocher",
+			//                 "description": "Zahnstocher",
+			//                 "category": 0,
+			//                 "categoryName": "Sonstiges",
+			//                 "standardamount": 1
+			//             }
+			//         }
+			//     ]
+			// };
+
+			// var data = $('#FlyItemList').val();
+			// console.log(data);
+
+			// data.FlyItems.forEach((product) => {
+
+			// 	if (!listOfProductCategory.includes(product.product.categoryName)) {
+			// 		listOfProductCategory.push(product.product.categoryName);
+			// 		const collapsibleList = document.getElementById('allList');
+
+			// 		const newList2 = document.createElement('li');
+			// 		const newItem1 = document.createElement('div');
+			// 		newItem1.classList.add('collapsible-header');
+			// 		newItem1.id = 'category' + product.product.id;
+			// 		const newList1 = document.createElement('ul');
+			// 		newList1.classList.add('collapsible-body');
+			// 		newList1.id = 'category' + product.product.categoryName + 'list';
+			// 		newItem1.appendChild(document.createTextNode(' ' + product.product.categoryName));
+			// 		newItem1.appendChild(newList1);
+			// 		newList2.appendChild(newItem1);
+			// 		collapsibleList.appendChild(newList2);
+			// 	}
+
+
+
+			// 	const section = document.getElementById('category' + product.product.categoryName + 'list');
+			// 	const newItem = document.createElement('li');
+
+
+			// 	const checkbox = document.createElement('input');
+			// 	checkbox.type = 'checkbox';
+
+
+			// 	const number = document.createElement('span');
+			// 	number.contentEditable = true;
+			// 	number.innerText = product.amount;
+
+			// 	const infoButton = document.createElement('button');
+			// 	infoButton.classList.add('info-button');
+			// 	const i = document.createTextNode('i');
+			// 	infoButton.appendChild(i);
+			// 	const infoText = document.createElement('div');
+			// 	infoText.classList.add('info-text');
+			// 	const text = document.createTextNode(product.product.description);
+			// 	infoText.appendChild(text);
+			// 	infoButton.appendChild(infoText);
+
+
+			// 	number.addEventListener('keydown', (event) => {
+			// 		if ((event.key >= '0' && event.key <= '9') ||
+			// 			event.key === 'Backspace' ||
+			// 			event.key === 'ArrowLeft' ||
+			// 			event.key === 'ArrowRight') {
+			// 		} else {
+			// 			event.preventDefault();
+			// 		}
+			// 	});
+
+
+			// 	newItem.appendChild(checkbox);
+			// 	newItem.appendChild(number);
+			// 	newItem.appendChild(document.createTextNode(' ' + product.product.name));
+			// 	newItem.appendChild(infoButton);
+			// 	section.appendChild(newItem);
+
+			// })
+
+
+		// }
+	</script>
+}
