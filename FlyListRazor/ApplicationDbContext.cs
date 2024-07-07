@@ -12,7 +12,8 @@ namespace FlyList
         public DbSet<FlyItemList> FlyItemLists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb");
+            optionsBuilder.UseNpgsql("Host=raspberrypie;Username=postgres;Password=sa");
+            //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb");
         }
     }
 }
