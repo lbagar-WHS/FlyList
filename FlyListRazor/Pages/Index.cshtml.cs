@@ -102,7 +102,7 @@ namespace FlyListRazor.Pages
 
 			Categories = _categoryRepository.GetAll().ToList();
 
-			FlyItemList = _flyItemListRepository.GetAll().FirstOrDefault();
+			FlyItemList = _flyItemListRepository.GetAll().First();
 		}
 
 		public void OnGetAsync()

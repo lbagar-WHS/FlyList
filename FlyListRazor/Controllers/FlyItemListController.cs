@@ -5,33 +5,34 @@ using Microsoft.AspNetCore.Mvc;
 namespace FlyList.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class FlyItemListController(ListItemRepository listItemRepository, FlyItemListRepository flyItemListRepository) : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult GetAllFlyListItemsById(Guid id)
-        {
-            var listItems = flyItemListRepository.Read(id);
-            return Ok(listItems);
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult GetAllFlyListItemsById(Guid id)
+        //{
+        //    var listItems = flyItemListRepository.Read(id);
+        //    return Ok(listItems);
+        //}
 
-        [HttpPost]
-        public IActionResult AddFlyListItem([FromBody] FlyItemList flyItemList)
-        {
-            var listItem = new ListItem();
+		[HttpGet("{listItemId}")]
+		public IActionResult AddFlyListItem(Guid listItemId)
+		{
+			var flyItem = listItemRepository.Read(listItemId);
 
-            if (listItem == null)
-            {
-                return BadRequest("ListItem is null.");
-            }
+			if (flyItem == null)
+			{
+				return BadRequest("ListItem is null.");
+			}
+			var flyItemList = flyItemListRepository.GetAll().FirstOrDefault();
 
-            flyItemList.FlyItems.Add(listItem);
+			flyItemList.FlyItems.Add(flyItem);
 
-            flyItemListRepository.Update(flyItemList);
-            return CreatedAtAction(nameof(GetListItemById), new { id = flyItemList.Id }, flyItemList);
-        }
+			flyItemListRepository.Update(flyItemList);
+			return CreatedAtAction(nameof(GetListItemById), new { id = flyItemList.Id }, flyItemList);
+		}
 
-        [HttpPut("{id}")]
+		[HttpPut("{id}")]
         public IActionResult ModifyFlyListItem(Guid id, [FromBody] ListItem updatedListItem)
         {
             if (updatedListItem == null || updatedListItem.Id != id)
